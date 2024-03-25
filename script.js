@@ -17,6 +17,7 @@ let cart = [];
 // Abrir o modal do carrinho
 cartBtn.addEventListener("click", function() {
     cartModal.style.display = "flex"
+    updateCartModal();
 })
 
 // Fechar modal quando clicar fora
@@ -68,19 +69,18 @@ function updateCartModal(){
 
     cart.forEach(item => {
         const cartItemElement = document.createElement("div");
+        cartItemElement.classList.add("flex", "justify-between", "mb-4", "flex-col")
 
         cartItemElement.innerHTML = `
-        <div>
+        <div class="flex items-center justify-between>
             <div>
-                <p>${item.name}</p>
+                <p class="font-medium" >${item.name}</p>
                 <p>${item.quantify}</p>
-                <p>R$${item.price}</p>
+                <p class="font-medium" "mt-2" >R$${item.price}</p>
             </div>
-            <div>
                 <button>
                   Remover
                 </button>
-            </div>
         </div>
         `
 
