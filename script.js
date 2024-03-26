@@ -141,6 +141,13 @@ addressInput.addEventListener("input", function(event){
 
 //para não enviar vazio
 checkoutBtn.addEventListener("click", function(){
+
+    const isOpen = checkRestaurantOpen()
+    if(!isOpen){
+        alert("RESTAURANTE FECHADO NO MOMENTO!")
+        return
+    }
+
     if(cart.length === 0) return
     if(addressInput.value === ""){
         addressWarn.classList.remove("hidden")
@@ -148,6 +155,15 @@ checkoutBtn.addEventListener("click", function(){
         return
     }
     
+//enviar o pedidio para o whatsapp
+    const cartItems = cart.map((item) => {
+        return (`${item.name} Quantidade: (${item.quantify}) Preço: R$${item.price} - `)
+    }).join("")
+
+    const message = encodeURIComponent(cartItems)
+    const phone = "64992037404"
+
+    window.open(`https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`, "_bland")
 });
 
 //Verificar a hora e manipular o card horario
