@@ -27,7 +27,7 @@ cartModal.addEventListener("click", function(event) {
     }
 })
 
-// sair quando apertar Fechar
+// Sair quando apertar "Fechar"
 closeModalBtn.addEventListener("click", function(){
     cartModal.style = "none"
 })
@@ -127,7 +127,7 @@ function removeItemCart(name) {
     }
 }
 
- //monitorar input
+ //Monitorar input
 addressInput.addEventListener("input", function(event){
     let inputValue = event.target.value
 
@@ -139,13 +139,24 @@ addressInput.addEventListener("input", function(event){
 })
 
 
-//para não enviar vazio
+//Para não enviar com input vazio
 checkoutBtn.addEventListener("click", function(){
 
     const isOpen = checkRestaurantOpen()
+
     if(!isOpen){
-        alert("RESTAURANTE FECHADO NO MOMENTO!")
-        return
+        Toastify({
+            text: "Ops o restaurante está fechado",
+            duration: 3000,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "#ef4444",
+            },
+        }).showToast()
+
     }
 
     if(cart.length === 0) return
@@ -164,6 +175,9 @@ checkoutBtn.addEventListener("click", function(){
     const phone = "64992037404"
 
     window.open(`https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`, "_bland")
+
+    cart = []
+    updateCartModal()
 });
 
 //Verificar a hora e manipular o card horario
